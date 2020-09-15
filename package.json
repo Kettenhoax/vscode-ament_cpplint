@@ -1,0 +1,84 @@
+{
+    "name": "amentcpplint",
+    "displayName": "ament_cpplint",
+    "description": "code linting by ament_cpplint",
+    "version": "0.1.0",
+    "license": "Apache-2.0",
+    "publisher": "kettenhoax",
+    "repository": {
+        "type": "Git",
+        "url": "https://github.com/Kettenhoax/vscode-ament_cpplint"
+    },
+    "engines": {
+        "vscode": "^1.21.0"
+    },
+    "categories": [
+        "Linters"
+    ],
+    "keywords": [
+        "ROS",
+        "ROS2",
+        "ament",
+        "colcon"
+    ],
+    "activationEvents": [
+        "onLanguage:cpp",
+        "onLanguage:c",
+        "onCommand:ament_cpplint.runOnFile",
+        "onCommand:ament_cpplint.runOnWorkspaceFolder"
+    ],
+    "main": "./out/src/extension",
+    "contributes": {
+        "commands": [
+            {
+                "command": "ament_cpplint.runOnFile",
+                "title": "Analyze current file",
+                "category": "ament_cpplint"
+            },
+            {
+                "command": "ament_cpplint.runOnWorkspaceFolder",
+                "title": "Analyze current workspace folder",
+                "category": "ament_cpplint"
+            }
+        ],
+        "configuration": {
+            "type": "object",
+            "title": "ament_cpplint",
+            "properties": {
+                "ament_cpplint.path": {
+                    "type": "string",
+                    "default": "ament_cpplint",
+                    "description": "Path to the ament_cpplint executable. Should be on path when the ROS distro is sourced, otherwise /opt/ros/{distro}/bin is searched"
+                },
+                "ament_cpplint.linelength": {
+                    "type": "number",
+                    "default": 80,
+                    "description": "This is the allowed line length for the project."
+                },
+                "ament_cpplint.filters": {
+                    "type": "array",
+                    "default": [],
+                    "description": "Specify a comma-separated list of category-filters to apply: only error messages whose category names pass the filters will be printed."
+                },
+                "ament_cpplint.root": {
+                    "type": "string",
+                    "default": "${workspaceFolder}/include",
+                    "description": "The root directory used for deriving header guard CPP variables."
+                }
+            }
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "tsc -p ./",
+        "compile": "tsc -watch -p ./"
+    },
+    "devDependencies": {
+        "@types/node": "^12.0.0",
+        "@types/vscode": "^1.14.0",
+        "typescript": "^3.5.1",
+        "vscode-test": "^1.4.0"
+    },
+    "dependencies": {
+        "lookpath": "^1.1.0"
+    }
+}
