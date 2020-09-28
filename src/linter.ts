@@ -23,8 +23,7 @@ export class Linter {
             args.push(root);
         }
         if (this.config.filters.length) {
-            args.push('--filters');
-            args.push(this.config.filters.join(','));
+            args.push(`--filters=${this.config.filters.join(',')}`);
         }
         for (let path of paths) {
             args.push(path);
